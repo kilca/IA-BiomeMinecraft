@@ -2,6 +2,7 @@
 from cedar.cedar import Cedar
 from cedar.biomeData import get_biomeData
 import pathlib
+import sys
 
 def getJarPath():
     jarStringPath = str(pathlib.Path(__file__).parent.absolute())+"\map\minecraft_server.1.12.2.jar"
@@ -10,7 +11,7 @@ def getJarPath():
         print("DO NOT FORGET TO ADD THE JAR IN MAP DIRECTORY")
         print("You can download the file here :")
         print("http://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar")
-        exit()
+        sys.exit()
     return jarStringPath
         
 def prepareMap(seed,path):
