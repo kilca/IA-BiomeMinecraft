@@ -33,7 +33,7 @@ def prepareBiomeCoords(cedar):
     
 def getBiome(coords,x,y):
     biomeConv = get_biomeData()
-    biome = coords.get(pos)
+    biome = coords.get((x,y))
     if (biome):
         return (biomeConv.get(biome))
     else:
