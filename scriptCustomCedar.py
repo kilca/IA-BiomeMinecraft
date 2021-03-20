@@ -13,7 +13,7 @@ def getJarPath():
         print("http://s3.amazonaws.com/Minecraft.Download/versions/1.12.2/minecraft_server.1.12.2.jar")
         sys.exit()
     return jarStringPath
-        
+
 def prepareMap(seed,path):
     config = {
         'center': None,
@@ -30,7 +30,7 @@ def prepareMap(seed,path):
 def prepareBiomeCoords(cedar):
     return cedar.prepareBiomeCoords()
 
-    
+
 def getBiome(coords,x,y):
     biomeConv = get_biomeData()
     biome = coords.get(pos)
@@ -38,14 +38,14 @@ def getBiome(coords,x,y):
         return (biomeConv.get(biome))
     else:
         return ""
-    
+
 def test():
     #We generate the map
     ced = prepareMap(7037624733059203544,getJarPath())
-    
+
     #We get all blocks coords biomes
     coords = prepareBiomeCoords(ced)
-    
+
     #We get a dictionary that convert biome num id to biome string id
     biomeConv = get_biomeData()
     while 1:
@@ -57,5 +57,5 @@ def test():
             print(biomeConv.get(biome))
         else:
             print("biome not found")
-        
+
 test()
