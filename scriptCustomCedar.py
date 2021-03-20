@@ -5,7 +5,7 @@ import pathlib
 import sys
 
 def getJarPath():
-    jarStringPath = str(pathlib.Path(__file__).parent.absolute())+"\map\minecraft_server.1.12.2.jar"
+    jarStringPath = str(pathlib.Path(__file__).parent.absolute())+r"\map\minecraft_server.1.12.2.jar"
     if not pathlib.Path(jarStringPath).exists():
         print("path to minecraft_server not found : ",jarStringPath)
         print("DO NOT FORGET TO ADD THE JAR IN MAP DIRECTORY")
@@ -38,14 +38,14 @@ def getBiome(coords,x,y):
         return (biomeConv.get(biome))
     else:
         return ""
-    
+
 def test():
     #We generate the map
     ced = prepareMap(7037624733059203544,getJarPath())
-    
+
     #We get all blocks coords biomes
     coords = prepareBiomeCoords(ced)
-    
+
     #We get a dictionary that convert biome num id to biome string id
     biomeConv = get_biomeData()
     while 1:
@@ -57,5 +57,5 @@ def test():
             print(biomeConv.get(biome))
         else:
             print("biome not found")
-        
+
 test()
