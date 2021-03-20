@@ -26,21 +26,36 @@ def prepareMap(seed,path):
     }
     return Cedar(**config)
 
+#retourne coords dict
 def prepareBiomeCoords(cedar):
     return cedar.prepareBiomeCoords()
+
+    
+def getBiome(coords,x,y):
+    biomeConv = get_biomeData()
+    biome = coords.get(pos)
+    if (biome):
+        return (biomeConv.get(biome))
+    else:
+        return ""
     
 def test():
     #We generate the map
-    ced = prepareMap(-4448730549960990376,getJarPath())
+    ced = prepareMap(7037624733059203544,getJarPath())
     
     #We get all blocks coords biomes
     coords = prepareBiomeCoords(ced)
     
     #We get a dictionary that convert biome num id to biome string id
     biomeConv = get_biomeData()
-    
-    for key, value in coords.items() :
-        print (key, biomeConv[value])
-
+    while 1:
+        print("Please Enter position with space:x y")
+        posInput = input().split()
+        pos = (int(posInput[0]),int(posInput[1]))
+        biome = coords.get(pos)
+        if (biome):
+            print(biomeConv.get(biome))
+        else:
+            print("biome not found")
         
 test()
