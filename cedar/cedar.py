@@ -32,6 +32,7 @@ class Cedar:
         
         world = self.world
         center = self.center
+        #print(center)
         resolution = self.resolution
         radius = self.radius
         

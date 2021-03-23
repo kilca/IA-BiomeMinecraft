@@ -14,15 +14,15 @@ def getJarPath():
         sys.exit()
     return jarStringPath
         
-def prepareMap(seed,path):
+def prepareMap(seed,path, verbosity, radius=100,center=None):
     config = {
-        'center': None,
+        'center': center,
         'jar': path.encode('unicode_escape'),
         'output': 'seed_{seed}.png',
-        'radius': 100,
+        'radius': radius,
         'resolution': 1,
         'seed': seed,
-        'verbosity':2
+        'verbosity':verbosity
     }
     return Cedar(**config)
 
@@ -41,7 +41,9 @@ def getBiome(coords,x,y):
 
 def test():
     #We generate the map
+    
     ced = prepareMap(7037624733059203544,getJarPath())
+    #ced = prepareMap(-4448730549960990376,getJarPath())
 
     #We get all blocks coords biomes
     coords = prepareBiomeCoords(ced)
@@ -51,11 +53,14 @@ def test():
     while 1:
         print("Please Enter position with space:x y")
         posInput = input().split()
-        pos = (int(posInput[0]),int(posInput[1]))
-        biome = coords.get(pos)
-        if (biome):
-            print(biomeConv.get(biome))
+        if (posInput == ['show']):
+            for key, value in coords.items():
+                print(key,",",value) 
         else:
-            print("biome not found")
+            pos = (int(posInput[0]),int(posInput[1]))
+            biome = coords.get(pos)
+            if (biome):#! do not work with id 0 (considered false)
+                print(biomeConv.get(biome))
+            else:
+                print("biome not found")
 
-test()
