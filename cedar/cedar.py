@@ -115,6 +115,7 @@ class Cedar:
             output = output.format(seed=seed)
 
             #Generate the world!
+            
             path = list(Spiral.spiral(radius, center))
             for i, spawn in enumerate(path):
                 self.log(1, "generating world ({0} of {1})".format(i+1, len(path)))

@@ -3,6 +3,7 @@ from cedar.cedar import Cedar
 from cedar.biomeData import get_biomeData
 import pathlib
 import sys
+import numpy as np
 
 def getJarPath():
     jarStringPath = str(pathlib.Path(__file__).parent.absolute())+r"\map\minecraft_server.1.12.2.jar"
@@ -25,6 +26,38 @@ def prepareMap(seed,path, verbosity, radius=100,center=None):
         'verbosity':verbosity
     }
     return Cedar(**config)
+
+
+import json
+
+def key_to_json(data):
+    if data is None or isinstance(data, (bool, int, str)):
+        return data
+    if isinstance(data, (tuple, frozenset)):
+        return str(data)
+    raise TypeError
+
+def to_json(data):
+    if data is None or isinstance(data, (bool, int, tuple, range, str, list)):
+        return data
+    if isinstance(data, (set, frozenset)):
+        return sorted(data)
+    if isinstance(data, dict):
+        return {key_to_json(key): to_json(data[key]) for key in data}
+    raise TypeError
+
+def write_file(mat):
+    with open('coords.json', 'w') as f:
+        json.dump(to_json(mat), f)
+
+
+def loadDict():
+    with open("coords.json", "rb") as file:
+        return formatDict(json.load(file))
+    
+def formatDict(data):
+    return dict((eval(k), v) for k, v in data.items()) 
+
 
 #retourne coords dict
 def prepareBiomeCoords(cedar):
